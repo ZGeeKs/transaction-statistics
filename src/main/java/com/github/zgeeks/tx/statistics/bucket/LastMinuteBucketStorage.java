@@ -15,12 +15,12 @@ public class LastMinuteBucketStorage implements BucketService {
 
     private static final long SIZE = 60_000;
     private final Clock clock;
-    private final List<Block> buckets;
+    private final List<SummaryBucket> buckets;
 
-    public LastMinuteBucketStorage(Clock clock, List<Block> buckets) {
+    public LastMinuteBucketStorage(Clock clock) {
         this.clock = clock;
         this.buckets = Stream
-                .generate(Block::new)
+                .generate(SummaryBucket::new)
                 .limit(SIZE)
                 .collect(Collectors.toList());
     }
@@ -36,7 +36,7 @@ public class LastMinuteBucketStorage implements BucketService {
             return Status.REJECTED;
         }
         int bucketIndex = milliSecondOfMinute(txTimestamp);
-        buckets.get(bucketIndex).update(transaction);
+        buckets.get(bucketIndex).accept(transaction);
         return Status.ACCEPTED;
     }
 
@@ -48,6 +48,17 @@ public class LastMinuteBucketStorage implements BucketService {
 
     @Override
     public Statistics getLastStatistics() {
-        return null;
+        long currentTimestamp = clock.millis();
+        return buckets.stream()
+            .filter(bucket -> bucket.isPartOfLastMinute(currentTimestamp))
+            .map(SummaryBucket::toDoubleSummaryStatistics)
+            .reduce(
+                (a, b) -> {
+                    a.combine(b);
+                    return a;
+                }
+            )
+            .map(Statistics.toStatistics())
+            .orElse(Statistics.empty());
     }
 }
