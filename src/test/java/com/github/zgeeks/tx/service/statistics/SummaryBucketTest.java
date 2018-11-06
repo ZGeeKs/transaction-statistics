@@ -7,11 +7,11 @@ import org.junit.Test;
 
 public class SummaryBucketTest {
 
-    private SummaryBucket summaryBucket;
+    private Summary summaryBucket;
 
     @Before
     public void setUp() {
-        summaryBucket = new SummaryBucket();
+        summaryBucket = new Summary();
     }
 
     @Test

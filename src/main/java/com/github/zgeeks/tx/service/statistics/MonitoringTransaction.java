@@ -6,6 +6,8 @@ import com.github.zgeeks.tx.service.MonitorService;
 import com.github.zgeeks.tx.service.TransactionService;
 
 import java.time.Clock;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 public class MonitoringTransaction implements TransactionService {
 
@@ -29,7 +31,7 @@ public class MonitoringTransaction implements TransactionService {
         if (millisInPast > SIZE) {
             return Status.REJECTED;
         }
-        monitorService.takeMeasurement(transaction.timestamp(), transaction.cost());
+        CompletableFuture.runAsync(() -> monitorService.takeMeasurement(transaction.timestamp(), transaction.cost()));
         return Status.ACCEPTED;
     }
 }

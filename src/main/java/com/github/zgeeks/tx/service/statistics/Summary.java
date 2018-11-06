@@ -6,13 +6,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import static com.github.zgeeks.tx.util.LockUtils.runSafely;
 
-final class SummaryBucket {
+final class Summary {
 
     private final ReadWriteLock readWriteLock;
     private DoubleSummaryStatistics doubleSummaryStatistics;
     private long lastUpdatedTimestamp;
 
-    SummaryBucket() {
+    Summary() {
         this.readWriteLock = new ReentrantReadWriteLock(true);
         this.doubleSummaryStatistics = new DoubleSummaryStatistics();
     }
