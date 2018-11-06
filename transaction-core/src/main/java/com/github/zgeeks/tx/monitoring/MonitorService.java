@@ -1,6 +1,4 @@
-package com.github.zgeeks.tx.service;
-
-import com.github.zgeeks.tx.domain.Statistics;
+package com.github.zgeeks.tx.monitoring;
 
 public interface MonitorService {
     void takeMeasurement(long timestamp, double cost);

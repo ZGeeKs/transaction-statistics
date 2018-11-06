@@ -1,4 +1,4 @@
-package com.github.zgeeks.tx.service.statistics;
+package com.github.zgeeks.tx.config;
 
 import com.github.zgeeks.tx.domain.Statistics;
 import com.github.zgeeks.tx.service.MonitorService;

@@ -1,4 +1,4 @@
-package com.github.zgeeks.tx.service.statistics;
+package com.github.zgeeks.tx.config;
 
 import com.github.zgeeks.tx.domain.Status;
 import com.github.zgeeks.tx.domain.Transaction;
@@ -7,7 +7,6 @@ import com.github.zgeeks.tx.service.TransactionService;
 
 import java.time.Clock;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 public class MonitoringTransaction implements TransactionService {
 

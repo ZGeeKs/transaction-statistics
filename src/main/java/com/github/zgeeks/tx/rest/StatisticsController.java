@@ -1,6 +1,6 @@
 package com.github.zgeeks.tx.rest;
 
-import com.github.zgeeks.tx.domain.Statistics;
+import com.github.zgeeks.tx.Statistics;
 import com.github.zgeeks.tx.service.MonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

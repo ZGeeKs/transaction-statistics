@@ -1,4 +1,4 @@
-package com.github.zgeeks.tx.domain;
+package com.github.zgeeks.tx;
 
 import org.immutables.value.Value;
 

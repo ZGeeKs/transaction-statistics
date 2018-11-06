@@ -1,10 +1,10 @@
-package com.github.zgeeks.tx.service.statistics;
+package com.github.zgeeks.tx.monitoring;
+
+import static com.github.zgeeks.tx.util.LockUtils.runSafely;
 
 import java.util.DoubleSummaryStatistics;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import static com.github.zgeeks.tx.util.LockUtils.runSafely;
 
 final class Summary {
 
