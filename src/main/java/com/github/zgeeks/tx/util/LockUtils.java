@@ -1,10 +1,10 @@
-package com.github.zgeeks.tx.statistics.util;
+package com.github.zgeeks.tx.util;
 
 import java.util.concurrent.locks.Lock;
 
 public final class LockUtils {
 
-    public static  <T> T runSafely(Lock lock, Callable<T> consumer) {
+    public static <T> T runSafely(Lock lock, Callable<T> consumer) {
         lock.lock();
         try {
             return consumer.run();

@@ -1,4 +1,4 @@
-package com.github.zgeeks.tx.statistics.domain;
+package com.github.zgeeks.tx.domain;
 
 import org.immutables.value.Value;
 
