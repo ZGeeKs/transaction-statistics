@@ -1,49 +1,51 @@
 package com.github.zgeeks.tx.service.statistics;
 
-//import com.github.zgeeks.tx.statistics.domain.ImmutableTransaction;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import com.github.zgeeks.tx.monitoring.Summary;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.time.Clock;
 
 public class SummaryBucketTest {
 
     private Summary summaryBucket;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         summaryBucket = new Summary();
     }
 
     @Test
     public void test_create_new_summary_statistics() {
-//        summaryBucket.accept(ImmutableTransaction.builder().timestamp(Clock.systemUTC().millis()).cost(100).build());
-        Assert.assertEquals(1, summaryBucket.toDoubleSummaryStatistics().getCount());
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getSum(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMax(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMin(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getAverage(), 0);
-//        summaryBucket.accept(ImmutableTransaction.builder().timestamp(Clock.systemUTC().millis()).cost(300).build());
-        Assert.assertEquals(2, summaryBucket.toDoubleSummaryStatistics().getCount());
-        Assert.assertEquals(400.0, summaryBucket.toDoubleSummaryStatistics().getSum(), 0);
-        Assert.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getMax(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMin(), 0);
-        Assert.assertEquals(200.0, summaryBucket.toDoubleSummaryStatistics().getAverage(), 0);
+        summaryBucket.accept(Clock.systemUTC().millis(), 100);
+        Assertions.assertEquals(1, summaryBucket.toDoubleSummaryStatistics().getCount());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getSum());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMax());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMin());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getAverage());
+        summaryBucket.accept(Clock.systemUTC().millis() + 1_000, 300);
+        Assertions.assertEquals(2, summaryBucket.toDoubleSummaryStatistics().getCount());
+        Assertions.assertEquals(400.0, summaryBucket.toDoubleSummaryStatistics().getSum());
+        Assertions.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getMax());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMin());
+        Assertions.assertEquals(200.0, summaryBucket.toDoubleSummaryStatistics().getAverage());
     }
 
     @Test
     public void test_reset_summary_statistics() {
-//        summaryBucket.accept(ImmutableTransaction.builder().timestamp(Clock.systemUTC().millis()).cost(100).build());
-        Assert.assertEquals(1, summaryBucket.toDoubleSummaryStatistics().getCount());
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getSum(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMax(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMin(), 0);
-        Assert.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getAverage(), 0);
-//        summaryBucket.accept(ImmutableTransaction.builder().timestamp(Clock.systemUTC().millis() - 60_000).cost(300).build());
-        Assert.assertEquals(1, summaryBucket.toDoubleSummaryStatistics().getCount());
-        Assert.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getSum(), 0);
-        Assert.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getMax(), 0);
-        Assert.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getMin(), 0);
-        Assert.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getAverage(), 0);
+        summaryBucket.accept(Clock.systemUTC().millis(), 100);
+        Assertions.assertEquals(1, summaryBucket.toDoubleSummaryStatistics().getCount());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getSum());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMax());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getMin());
+        Assertions.assertEquals(100.0, summaryBucket.toDoubleSummaryStatistics().getAverage());
+        summaryBucket.accept(Clock.systemUTC().millis() - 60_000, 300);
+        Assertions.assertEquals(1, summaryBucket.toDoubleSummaryStatistics().getCount());
+        Assertions.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getSum());
+        Assertions.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getMax());
+        Assertions.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getMin());
+        Assertions.assertEquals(300.0, summaryBucket.toDoubleSummaryStatistics().getAverage());
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.github.zgeeks.tx.rest;
 
-import com.github.zgeeks.tx.Statistics;
-import com.github.zgeeks.tx.service.MonitorService;
+import com.github.zgeeks.tx.monitoring.MonitorService;
+import com.github.zgeeks.tx.monitoring.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

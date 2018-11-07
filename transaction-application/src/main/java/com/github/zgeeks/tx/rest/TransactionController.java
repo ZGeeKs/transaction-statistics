@@ -1,7 +1,8 @@
 package com.github.zgeeks.tx.rest;
 
+import com.github.zgeeks.tx.TransactionService;
 import com.github.zgeeks.tx.domain.ImmutableTransaction;
-import com.github.zgeeks.tx.service.TransactionService;
+import com.github.zgeeks.tx.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

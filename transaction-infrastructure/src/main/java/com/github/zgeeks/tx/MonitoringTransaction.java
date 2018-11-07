@@ -1,9 +1,8 @@
-package com.github.zgeeks.tx.config;
+package com.github.zgeeks.tx;
 
 import com.github.zgeeks.tx.domain.Status;
 import com.github.zgeeks.tx.domain.Transaction;
-import com.github.zgeeks.tx.service.MonitorService;
-import com.github.zgeeks.tx.service.TransactionService;
+import com.github.zgeeks.tx.monitoring.MonitorService;
 
 import java.time.Clock;
 import java.util.concurrent.CompletableFuture;

@@ -1,7 +1,8 @@
-package com.github.zgeeks.tx.config;
+package com.github.zgeeks.tx;
 
-import com.github.zgeeks.tx.domain.Statistics;
-import com.github.zgeeks.tx.service.MonitorService;
+import com.github.zgeeks.tx.monitoring.MonitorService;
+import com.github.zgeeks.tx.monitoring.Statistics;
+import com.github.zgeeks.tx.monitoring.Summary;
 import com.github.zgeeks.tx.util.TimeUtils;
 
 import java.time.Clock;

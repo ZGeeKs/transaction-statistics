@@ -1,9 +1,9 @@
 package com.github.zgeeks.tx.config;
 
-import com.github.zgeeks.tx.service.MonitorService;
-import com.github.zgeeks.tx.service.TransactionService;
-import com.github.zgeeks.tx.service.statistics.LastMinuteMonitorStorage;
-import com.github.zgeeks.tx.service.statistics.MonitoringTransaction;
+import com.github.zgeeks.tx.LastMinuteMonitorStorage;
+import com.github.zgeeks.tx.MonitoringTransaction;
+import com.github.zgeeks.tx.TransactionService;
+import com.github.zgeeks.tx.monitoring.MonitorService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

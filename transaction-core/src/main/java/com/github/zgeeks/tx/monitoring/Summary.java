@@ -6,18 +6,18 @@ import java.util.DoubleSummaryStatistics;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-final class Summary {
+public final class Summary {
 
     private final ReadWriteLock readWriteLock;
     private DoubleSummaryStatistics doubleSummaryStatistics;
     private long lastUpdatedTimestamp;
 
-    Summary() {
+    public Summary() {
         this.readWriteLock = new ReentrantReadWriteLock(true);
         this.doubleSummaryStatistics = new DoubleSummaryStatistics();
     }
 
-    void accept(long timestamp, double cost) {
+    public void accept(long timestamp, double cost) {
         runSafely(readWriteLock.writeLock(), () -> {
             if (lastUpdatedTimestamp >= timestamp) {
                 doubleSummaryStatistics = new DoubleSummaryStatistics();
@@ -28,11 +28,11 @@ final class Summary {
         });
     }
 
-    boolean isPartOf(long timestamp, long duration) {
+    public boolean isPartOf(long timestamp, long duration) {
         return runSafely(readWriteLock.readLock(), () -> timestamp - lastUpdatedTimestamp <= duration);
     }
 
-    DoubleSummaryStatistics toDoubleSummaryStatistics() {
+    public DoubleSummaryStatistics toDoubleSummaryStatistics() {
         return runSafely(readWriteLock.readLock(), () -> {
             DoubleSummaryStatistics ds = new DoubleSummaryStatistics();
             ds.combine(doubleSummaryStatistics);

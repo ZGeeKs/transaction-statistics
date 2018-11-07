@@ -1,7 +1,7 @@
 package com.github.zgeeks.tx.service.statistics.bucket;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.*;
 import java.time.temporal.ChronoField;
@@ -10,7 +10,7 @@ public class TimeTest {
 
     private Clock clock;
 
-    @Before
+    @BeforeEach
     public void setup() {
         clock = Clock.systemUTC();
     }

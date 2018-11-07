@@ -1,0 +1,96 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about
+  Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).
+  For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "v1"
+  title: "Swagger Transactions api"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v1"
+tags:
+- name: "transactions"
+  description: "Everything about your Pets"
+
+schemes:
+- "http"
+paths:
+  /tranactions:
+    post:
+      tags:
+      - "transactions"
+      summary: "Create new transaction"
+      description: "Create new transaction"
+      operationId: "createTransaction"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/TransactionDTO"
+      responses:
+        201:
+          description: "Created"
+        412:
+          description: "Pre conditioned"
+        405:
+          description: "Invalid input"
+
+  /tranactions/statistics:
+    get:
+      tags:
+      - transactions
+      summary: "return the last one minutes statistics"
+      description: Multiple status values can be provided with comma separated strings
+      operationId: getStatistics
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/StatisticsDTO"
+        500:
+          description: "internal error"
+
+definitions:
+  TransactionDTO:
+    type: object
+    properties:
+      timestamp:
+        type: integer
+        format: int64
+      cost:
+        type: number
+        format: double
+
+  StatisticsDTO:
+    type: object
+    properties:
+      sum:
+        type: number
+        format: double
+      max:
+        type: number
+        format: double
+      min:
+        type: number
+        format: double
+      avg:
+        type: number
+        format: double
+      count:
+        type: integer
+        format: int64
