@@ -1,11 +1,11 @@
-package com.github.zgeeks.tx;
+package com.github.zgeeks.tx.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TransactionStatisticsApplication {
+public class StatisticsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TransactionStatisticsApplication.class, args);
+        SpringApplication.run(SpringApplication.class, args);
     }
 }
